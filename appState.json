@@ -1,0 +1,227 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "d45e765a-476f-40e1-82b3-d861b26d5918": {
+        "id": "d45e765a-476f-40e1-82b3-d861b26d5918",
+        "parent": null,
+        "name": "ec2-start.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "ec2-start.js",
+        "cursor": {
+          "lineNumber": 3,
+          "column": 1
+        },
+        "config": {
+          "runtime": "nodejs10.x",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": [],
+          "name": "kec2-start"
+        },
+        "triggers": [
+          {
+            "resourceName": "apigusEast1kEC2Controlec2startget",
+            "config": {}
+          }
+        ],
+        "customSecurityPolicy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Sub": "arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:instance/${EC2ID}"
+              },
+              "Action": [
+                "ec2:StartInstances"
+              ]
+            }
+          ]
+        }
+      },
+      "36cf16bd-ff52-4857-a368-8b66e8899926": {
+        "id": "36cf16bd-ff52-4857-a368-8b66e8899926",
+        "parent": null,
+        "name": "ec2-stop.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "ec2-stop.js",
+        "cursor": {
+          "lineNumber": 2,
+          "column": 85
+        },
+        "config": {
+          "runtime": "nodejs10.x",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": [],
+          "name": "kec2-stop"
+        },
+        "triggers": [
+          {
+            "resourceName": "apigusEast1kEC2Controlec2stopget",
+            "config": {}
+          }
+        ],
+        "customSecurityPolicy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Sub": "arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:instance/${EC2ID}"
+              },
+              "Action": [
+                "ec2:StopInstances"
+              ]
+            }
+          ]
+        }
+      },
+      "fb1326e6-4b87-469b-aac0-2168344f62bb": {
+        "id": "fb1326e6-4b87-469b-aac0-2168344f62bb",
+        "parent": null,
+        "name": "util.js",
+        "type": "JS_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "util.js",
+        "cursor": {
+          "lineNumber": 8,
+          "column": 42
+        }
+      }
+    },
+    "openFiles": [
+      "d45e765a-476f-40e1-82b3-d861b26d5918",
+      "36cf16bd-ff52-4857-a368-8b66e8899926",
+      "fb1326e6-4b87-469b-aac0-2168344f62bb"
+    ],
+    "currentFileId": "36cf16bd-ff52-4857-a368-8b66e8899926",
+    "resources": {
+      "apigusEast1kEC2Controlec2startget": {
+        "name": "apigusEast1kEC2Controlec2startget",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiType": 1,
+          "apiMode": 0,
+          "apiName": "kEC2Control",
+          "endpointType": "EDGE",
+          "resourceMode": 0,
+          "resourceName": "ec2/start",
+          "resourcePath": "/ec2/start",
+          "restMethod": "GET",
+          "proxyIntegration": true,
+          "enableCORS": false,
+          "stageMode": 0,
+          "stageName": "prod",
+          "mode": 0
+        }
+      },
+      "apigusEast1kEC2Controlec2stopget": {
+        "name": "apigusEast1kEC2Controlec2stopget",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiType": 1,
+          "apiMode": 0,
+          "apiName": "kEC2Control",
+          "endpointType": "EDGE",
+          "resourceMode": 0,
+          "resourceName": "ec2/stop",
+          "resourcePath": "/ec2/stop",
+          "restMethod": "GET",
+          "proxyIntegration": true,
+          "enableCORS": false,
+          "stageMode": 0,
+          "stageName": "prod",
+          "mode": 0
+        }
+      }
+    },
+    "customTemplate": {
+      "dialect": "CloudFormation",
+      "definitions": {
+        "Parameters": {
+          "EC2ID": {
+            "Type": "String",
+            "Default": ""
+          },
+          "TOKEN": {
+            "Type": "String",
+            "Default": ""
+          }
+        },
+        "Resources": {
+          "ec2Start": {
+            "Properties": {
+              "Environment": {
+                "Variables": {
+                  "EC2_ID": {
+                    "Ref": "EC2ID"
+                  },
+                  "TOKEN": {
+                    "Ref": "TOKEN"
+                  }
+                }
+              }
+            }
+          },
+          "ec2Stop": {
+            "Properties": {
+              "Environment": {
+                "Variables": {
+                  "EC2_ID": {
+                    "Ref": "EC2ID"
+                  },
+                  "TOKEN": {
+                    "Ref": "TOKEN"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {}
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "kec2-control",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "language": "nodejs",
+    "platformRegions": {},
+    "lastSave": 1592549544503
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "kec2-control",
+      "url": "https://github.com/Kumudikatest/kec2-control"
+    }
+  }
+}
